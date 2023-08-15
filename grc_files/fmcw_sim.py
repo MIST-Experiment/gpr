@@ -76,7 +76,7 @@ class fmcw_sim(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.samp_rate = samp_rate = 25000000
+        self.samp_rate = samp_rate = 12000000
         self.center_freq = center_freq = 100000000
 
         ##################################################
@@ -204,13 +204,13 @@ class fmcw_sim(gr.top_block, Qt.QWidget):
         self.qtgui_sink_x_0_2.enable_rf_freq(False)
 
         self.top_layout.addWidget(self._qtgui_sink_x_0_2_win)
-        self.blocks_vco_f_0_0 = blocks.vco_f(samp_rate, 3140000*10, 1)
+        self.blocks_vco_f_0_0 = blocks.vco_f(samp_rate, 3140000*1, 1)
         self.blocks_float_to_complex_0 = blocks.float_to_complex(1)
-        self.blocks_file_sink_0_0_2 = blocks.file_sink(gr.sizeof_gr_complex*1, '/home/gprlab/Desktop/gnu_log/chirp_log14', False)
+        self.blocks_file_sink_0_0_2 = blocks.file_sink(gr.sizeof_gr_complex*1, '/home/gprlab/Desktop/gnu_log/chirp_log28', False)
         self.blocks_file_sink_0_0_2.set_unbuffered(False)
-        self.blocks_file_sink_0_0_1 = blocks.file_sink(gr.sizeof_gr_complex*1, '/home/gprlab/Desktop/gnu_log/out1_log14', False)
+        self.blocks_file_sink_0_0_1 = blocks.file_sink(gr.sizeof_gr_complex*1, '/home/gprlab/Desktop/gnu_log/out1_log28', False)
         self.blocks_file_sink_0_0_1.set_unbuffered(False)
-        self.blocks_file_sink_0_0_0 = blocks.file_sink(gr.sizeof_gr_complex*1, '/home/gprlab/Desktop/gnu_log/out0_log14', False)
+        self.blocks_file_sink_0_0_0 = blocks.file_sink(gr.sizeof_gr_complex*1, '/home/gprlab/Desktop/gnu_log/out0_log28', False)
         self.blocks_file_sink_0_0_0.set_unbuffered(False)
         self.analog_sig_source_x_0_0 = analog.sig_source_f(samp_rate, analog.GR_SAW_WAVE, 10000, 1, 0, 0)
 
@@ -222,8 +222,8 @@ class fmcw_sim(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_float_to_complex_0, 0), (self.blocks_file_sink_0_0_2, 0))
         self.connect((self.blocks_float_to_complex_0, 0), (self.uhd_usrp_sink_0_0, 1))
         self.connect((self.blocks_float_to_complex_0, 0), (self.uhd_usrp_sink_0_0, 0))
-        self.connect((self.blocks_vco_f_0_0, 0), (self.blocks_float_to_complex_0, 0))
         self.connect((self.blocks_vco_f_0_0, 0), (self.blocks_float_to_complex_0, 1))
+        self.connect((self.blocks_vco_f_0_0, 0), (self.blocks_float_to_complex_0, 0))
         self.connect((self.blocks_vco_f_0_0, 0), (self.qtgui_sink_x_0_2, 0))
         self.connect((self.uhd_usrp_source_0_0_0, 0), (self.blocks_file_sink_0_0_0, 0))
         self.connect((self.uhd_usrp_source_0_0_0, 1), (self.blocks_file_sink_0_0_1, 0))
